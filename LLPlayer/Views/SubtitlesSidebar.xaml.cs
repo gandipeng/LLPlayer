@@ -1,6 +1,7 @@
 ﻿using System.Windows;
 using System.Windows.Controls;
 using LLPlayer.Controls;
+using LLPlayer.Services;
 using LLPlayer.ViewModels;
 
 namespace LLPlayer.Views;
@@ -17,6 +18,7 @@ public partial class SubtitlesSidebar : UserControl
         Loaded += (sender, args) =>
         {
             VM.RequestScrollToTop += OnRequestScrollToTop;
+            UiLocalization.ApplyTo(this);
         };
 
         Unloaded += (sender, args) =>

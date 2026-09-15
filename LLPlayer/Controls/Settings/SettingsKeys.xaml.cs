@@ -75,7 +75,7 @@ public class SettingsKeysVM : Bindable
                 mergeActions.Add(new ActionData()
                 {
                     Action = action,
-                    Description = action.GetDescription(),
+                    Description = UiLocalization.TranslateText(action.GetDescription()),
                     DisplayName = action.ToString(),
                     Group = action.ToGroup()
                 });
@@ -88,7 +88,7 @@ public class SettingsKeysVM : Bindable
             {
                 Action = KeyBindingAction.Custom,
                 CustomAction = action,
-                Description = action.GetDescription(),
+                Description = UiLocalization.TranslateText(action.GetDescription()),
                 DisplayName = action.ToString() + @" ©︎", // c=custom
                 Group = action.ToGroup()
             });
@@ -263,13 +263,13 @@ public class KeyBindingWrapper : Bindable
 
         if (keyBinding.Action != KeyBindingAction.Custom)
         {
-            action.Description = keyBinding.Action.GetDescription();
+            action.Description = UiLocalization.TranslateText(keyBinding.Action.GetDescription());
             action.DisplayName = keyBinding.Action.ToString();
         }
         else if (Enum.TryParse(keyBinding.ActionName, out CustomKeyBindingAction customAction))
         {
             action.CustomAction = customAction;
-            action.Description = customAction.GetDescription();
+            action.Description = UiLocalization.TranslateText(customAction.GetDescription());
             action.DisplayName = keyBinding.ActionName + @" ©︎";
         }
         else

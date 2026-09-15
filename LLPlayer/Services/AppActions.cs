@@ -408,6 +408,7 @@ public class AppActions
             switch (e.PropertyName)
             {
                 case nameof(_config.IsDarkTitlebar):
+                case nameof(_config.UiLanguage):
                 case nameof(_player.Config.Subtitles.WhisperCppConfig.RuntimeLibraries):
                     requiredRestart = true;
                     break;

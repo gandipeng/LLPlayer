@@ -33,6 +33,11 @@ public class AppConfig : Bindable
     public string Version { get; set; } = "";
 
     /// <summary>
+    /// 保存用户选择的界面语言，启动阶段会在创建窗口前读取。
+    /// </summary>
+    public UiLanguage UiLanguage { get; set => Set(ref field, value); } = UiLanguage.English;
+
+    /// <summary>
     /// State to skip the setter run when reading JSON
     /// </summary>
     [JsonIgnore]

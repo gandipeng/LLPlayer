@@ -130,6 +130,15 @@
                         </TreeViewItem.Header>
                     </TreeViewItem>
 
+                    <TreeViewItem Tag="SettingsLanguage">
+                        <TreeViewItem.Header>
+                            <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                                <materialDesign:PackIcon Kind="Translate" Width="24" Height="24" Margin="0 0 8 0" />
+                                <TextBlock Text="Language" VerticalAlignment="Center" />
+                            </StackPanel>
+                        </TreeViewItem.Header>
+                    </TreeViewItem>
+
                     <TreeViewItem Tag="SettingsPlugins">
                         <TreeViewItem.Header>
                             <StackPanel Orientation="Horizontal" VerticalAlignment="Center">

@@ -347,5 +347,8 @@ Temporary Items
 # XML Documentation
 FlyleafLib/FlyleafLib.xml
 
+# LLPlayer 运行时生成的个人配置
+LLPlayer.Config.json
+
 # YT-DLP
 yt-dlp.exe

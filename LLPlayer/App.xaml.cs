@@ -30,11 +30,13 @@ public partial class App : PrismApplication
 
     static App()
     {
-        // Set thread culture to English and error messages to English
+        // 根据已保存的设置，在创建窗口前确定界面文化。
         Utils.SaveOriginalCulture();
 
-        CultureInfo.DefaultThreadCurrentCulture = new CultureInfo("en-US");
-        CultureInfo.DefaultThreadCurrentUICulture = new CultureInfo("en-US");
+        CultureInfo culture = UiLocalization.GetCulture();
+        CultureInfo.DefaultThreadCurrentCulture = culture;
+        CultureInfo.DefaultThreadCurrentUICulture = culture;
+        UiLocalization.Initialize();
     }
 
     protected override void RegisterTypes(IContainerRegistry containerRegistry)
@@ -93,7 +95,10 @@ public partial class App : PrismApplication
             Log.Error($"Unknown error occurred in App: {e.Exception}");
             Logger.ForceFlush();
 
-            ErrorDialogHelper.ShowUnknownErrorPopup($"Unhandled Exception: {e.Exception.Message}", "Global", e.Exception);
+            ErrorDialogHelper.ShowUnknownErrorPopup(
+                $"{UiLocalization.TranslateText("Unhandled Exception: ")}{e.Exception.Message}",
+                "Global",
+                e.Exception);
             e.Handled = true;
         }
     }

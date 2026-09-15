@@ -1,0 +1,32 @@
+<UserControl x:Class="LLPlayer.Controls.Settings.SettingsLanguage"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:local="clr-namespace:LLPlayer.Controls.Settings"
+             xmlns:services="clr-namespace:LLPlayer.Services"
+             xmlns:vm="clr-namespace:LLPlayer.ViewModels"
+             mc:Ignorable="d"
+             d:DataContext="{d:DesignInstance vm:SettingsDialogVM}">
+    <ScrollViewer>
+        <StackPanel>
+            <TextBlock Text="Language" FontSize="24" FontWeight="Bold" Margin="0 0 0 16" />
+
+            <GroupBox Header="Language settings">
+                <StackPanel>
+                    <TextBlock Text="Choose the language used by menus, settings, and dialog text." TextWrapping="Wrap" Margin="0 0 0 12" />
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Width="180" Text="Language" />
+                        <ComboBox Width="180"
+                                  SelectedValue="{Binding FL.Config.UiLanguage}"
+                                  SelectedValuePath="Tag">
+                            <ComboBoxItem Content="English" Tag="{x:Static services:UiLanguage.English}" />
+                            <ComboBoxItem Content="Simplified Chinese" Tag="{x:Static services:UiLanguage.ChineseSimplified}" />
+                        </ComboBox>
+                    </StackPanel>
+                    <TextBlock Text="Restart the application after saving to apply the interface language." TextWrapping="Wrap" Margin="0 12 0 0" />
+                </StackPanel>
+            </GroupBox>
+        </StackPanel>
+    </ScrollViewer>
+</UserControl>

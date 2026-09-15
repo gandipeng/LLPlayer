@@ -2,6 +2,7 @@
 using System.Windows;
 using System.Windows.Input;
 using System.Windows.Interop;
+using System.Windows.Threading;
 using FlyleafLib.Controls.WPF;
 using LLPlayer.Services;
 using LLPlayer.ViewModels;
@@ -20,6 +21,7 @@ public partial class MainWindow : Window
 
         SetWindowSize();
         SetTitleBarDarkMode(this);
+        Loaded += (_, _) => Dispatcher.BeginInvoke(() => UiLocalization.ApplyTo(this), DispatcherPriority.Loaded);
     }
 
     private void SetWindowSize()

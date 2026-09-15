@@ -59,7 +59,7 @@ public class ErrorDialogVM : Bindable, IDialogAware
         }
     } = "";
 
-    public string ErrorTitle => IsUnknown ? $"{ErrorType} Unknown Error" : $"{ErrorType} Error";
+    public string ErrorTitle => UiLocalization.TranslateText(IsUnknown ? $"{ErrorType} Unknown Error" : $"{ErrorType} Error");
 
     public DelegateCommand CmdCopyMessage => field ??= new(() =>
     {

@@ -35,7 +35,7 @@ public class CheatSheetDialogVM : Bindable, IDialogAware
                     Alt = k.Alt,
                     Ctrl = k.Ctrl,
                     Shift = k.Shift,
-                    Description = k.Action.GetDescription(),
+                    Description = UiLocalization.TranslateText(k.Action.GetDescription()),
                     Group = k.Action.ToGroup(),
                     Key = k.Key,
                     KeyName = (string)keyConverter.Convert(k.Key, typeof(string), null, CultureInfo.CurrentCulture),
@@ -52,7 +52,7 @@ public class CheatSheetDialogVM : Bindable, IDialogAware
 
                     key.ActionName = customAction.ToString();
                     key.CustomAction = customAction;
-                    key.Description = customAction.GetDescription();
+                    key.Description = UiLocalization.TranslateText(customAction.GetDescription());
                     key.Group = customAction.ToGroup();
                 }
 

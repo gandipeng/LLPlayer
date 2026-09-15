@@ -1,5 +1,6 @@
 ﻿using System.Windows;
 using System.Windows.Controls;
+using LLPlayer.Services;
 using LLPlayer.ViewModels;
 
 namespace LLPlayer.Views;
@@ -13,6 +14,7 @@ public partial class FlyleafOverlay : UserControl
         InitializeComponent();
 
         DataContext = ((App)Application.Current).Container.Resolve<FlyleafOverlayVM>();
+        Loaded += (_, _) => UiLocalization.ApplyTo(this);
     }
 
     private void FlyleafOverlay_OnSizeChanged(object sender, SizeChangedEventArgs e)

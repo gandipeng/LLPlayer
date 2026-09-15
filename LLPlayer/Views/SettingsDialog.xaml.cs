@@ -1,6 +1,8 @@
 ﻿using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Threading;
 using LLPlayer.Controls.Settings;
+using LLPlayer.Services;
 using LLPlayer.ViewModels;
 
 namespace LLPlayer.Views;
@@ -12,6 +14,7 @@ public partial class SettingsDialog : UserControl
         InitializeComponent();
 
         DataContext = ((App)Application.Current).Container.Resolve<SettingsDialogVM>();
+        Loaded += SettingsDialog_OnLoaded;
     }
 
     private void SettingsTreeView_OnSelectedItemChanged(object sender, RoutedPropertyChangedEventArgs<object> e)
@@ -78,6 +81,10 @@ public partial class SettingsDialog : UserControl
                     SettingsContent.Content = new SettingsThemes();
                     break;
 
+                case nameof(SettingsLanguage):
+                    SettingsContent.Content = new SettingsLanguage();
+                    break;
+
                 case nameof(SettingsPlugins):
                     SettingsContent.Content = new SettingsPlugins();
                     break;
@@ -86,6 +93,42 @@ public partial class SettingsDialog : UserControl
                     SettingsContent.Content = new SettingsAbout();
                     break;
             }
+
+            ScheduleSettingsPageTranslation();
         }
+    }
+
+    private void SettingsDialog_OnLoaded(object sender, RoutedEventArgs e)
+    {
+        UiLocalization.ApplyTo(this);
+        ScheduleSettingsPageTranslation();
+    }
+
+    private void ScheduleSettingsPageTranslation()
+    {
+        if (SettingsContent.Content is not FrameworkElement page)
+        {
+            return;
+        }
+
+        // 内容模板会在控件加载后才创建视觉树；此时翻译才能覆盖全部标签。
+        if (page.IsLoaded)
+        {
+            page.Dispatcher.BeginInvoke(() => UiLocalization.ApplyTo(page), DispatcherPriority.Loaded);
+            return;
+        }
+
+        page.Loaded += SettingsPage_OnLoaded;
+    }
+
+    private void SettingsPage_OnLoaded(object sender, RoutedEventArgs e)
+    {
+        if (sender is not FrameworkElement page)
+        {
+            return;
+        }
+
+        page.Loaded -= SettingsPage_OnLoaded;
+        page.Dispatcher.BeginInvoke(() => UiLocalization.ApplyTo(page), DispatcherPriority.Loaded);
     }
 }

@@ -2,6 +2,7 @@
 using LLPlayer.ViewModels;
 using System.Windows.Controls;
 using System.Windows.Input;
+using LLPlayer.Services;
 
 namespace LLPlayer.Views;
 
@@ -18,6 +19,7 @@ public partial class ErrorDialog : UserControl
 
     private void FrameworkElement_OnLoaded(object sender, RoutedEventArgs e)
     {
+        UiLocalization.ApplyTo(this);
         Keyboard.Focus(sender as IInputElement);
     }
 
